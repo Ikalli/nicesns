@@ -1,6 +1,17 @@
 import Link from 'next/link';
-import { Menu, Input, Button } from 'antd';
+import PropTypes from 'prop-types';
+import { Menu, Input, Row, Col } from 'antd';
 
+import LoginForm from './loginform';
+import UserProfile from './userprofile';
+
+const mock = {
+	nickname: 'MockNickName',
+	Post: [],
+	Followings: [],
+	Followers: [],
+	isLoggedin: false,
+};
 
 function Layout({ children }) {
 	return (
@@ -20,11 +31,20 @@ function Layout({ children }) {
 					<Input.Search enterButton style={{ verticalAlign: 'middle' }} />
 				</Menu.Item>
 			</Menu>
-			<Link href="/signup">
-				<Button>SignUp</Button>
-			</Link>
-			{children}
+			<Row gutter={8}>
+				<Col xs={24} md={6}>
+					{
+						mock.isLoggedin ? <UserProfile/> : <LoginForm/>
+					}
+				</Col>
+				<Col xs={24} md={12}>{children}</Col>
+			</Row>
 		</div>
 	);
 };
+
+Layout.PropTypes = {
+	children: PropTypes.node
+}
+
 export default Layout;
