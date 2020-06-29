@@ -54,46 +54,38 @@ export default function SignUp() {
 
 	return (
 		<>
-			<Head>
-				<title>NiceSNS</title>
-				<link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.3.5/antd.css"
-        />
-			</Head>
-			<Layout>
-				<Form onSubmit={onSubmit} style={{ padding: 10 }}>
-					<div>
-						<label htmlFor="user-id">ID</label>
-						<br />
-						<Input name="user-id" required value={id} onChange={onChangeId} />
-					</div>
-					<div>
-						<label htmlFor="user-nick">NickName</label>
-						<br />
-						<Input name="user-nick" required value={nick} onChange={onChangeNick} />
-					</div>
-					<div>
-						<label htmlFor="user-pass">Password</label>
-						<br />
-						<Input name="user-pass" required value={pass} onChange={onChangePass} />
-					</div>
-					<div>
-						<label htmlFor="user-pass-chk">Password Check</label>
-						<br />
-						<Input name="user-pass-chk" required value={passChk} onChange={onChangePassChk} />
-						{passError && <div style={{ color: 'red' }}>Please check password</div>}
-					</div>
-					<div>
-						<Checkbox name="user-term" value={term} onChange={onChangeTerm}>
-							Are you agree this term?
-						</Checkbox>
-						{termError && <div style={{ color: 'red' }}>You must agree term</div>}
-					</div>
-					<div>
-						<Button type="primary" htmlType="submit">Register</Button>
-					</div>
-				</Form>
-			</Layout>
+			<Form onSubmit={onSubmit} style={{ padding: 10 }}>
+				<div>
+					<label htmlFor="user-id">ID</label>
+					<br />
+					<Input name="user-id" required value={id} onChange={onChangeId} />
+				</div>
+				<div>
+					<label htmlFor="user-nick">NickName</label>
+					<br />
+					<Input name="user-nick" required value={nick} onChange={onChangeNick} />
+				</div>
+				<div>
+					<label htmlFor="user-pass">Password</label>
+					<br />
+					<Input name="user-pass" required value={pass} onChange={onChangePass} />
+				</div>
+				<div>
+					<label htmlFor="user-pass-chk">Password Check</label>
+					<br />
+					<Input name="user-pass-chk" required value={passChk} onChange={onChangePassChk} />
+					{passError && <div style={{ color: 'red' }}>Please check password</div>}
+				</div>
+				<div>
+					<Checkbox name="user-term" value={term} onChange={onChangeTerm}>
+						Are you agree this term?
+					</Checkbox>
+					{termError && <div style={{ color: 'red' }}>You must agree term</div>}
+				</div>
+				<div>
+					<Button type="primary" htmlType="submit">Register</Button>
+				</div>
+			</Form>
 		</>
 	);
 }

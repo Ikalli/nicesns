@@ -1,12 +1,13 @@
 import Head from 'next/head';
 import PropTypes from 'prop-types';
 import Layout from '../components/layout';
+import { Container } from 'next/app';
 
 function NiceSns({ Component }) {
 	return(
-		<>
+		<Container>
 			<Head>
-				<Title>NiceSNS</Title>
+				<title>NiceSNS</title>
 				<link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.3.5/antd.css"
         />
@@ -14,7 +15,7 @@ function NiceSns({ Component }) {
       <Layout>
       	<Component />
     	</Layout>
-  	</>
+  	</Container>
 	);
 };
 
