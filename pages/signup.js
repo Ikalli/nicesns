@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { Form, Input, Checkbox, Button } from 'antd';
 
-import { useInput } from '../components/loginform';
+//import { useInput } from '../components/loginform';
 
 export default function SignUp() {
 	const [ pass, setPass ] = useState('');
@@ -41,13 +41,13 @@ export default function SignUp() {
 		setTerm(e.target.checked);
 	}
 
-	/*const useInput = (initialValue = null) => {
+	const useInput = (initialValue = null) => {
 		const [ value, setter ] = useState(initialValue);
 		const handler = e => {
 			setter(e.target.value);
 		};
 		return [value, handler];
-	};*/
+	};
 
 	const [ id, onChangeId ] = useInput('');
 	const [ nick, onChangeNick ] = useInput('');
