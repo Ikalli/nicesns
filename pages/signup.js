@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import Head from 'next/head';
-import Layout from '../components/Layout';
+import { useState, useCallback } from 'react';
 import { Form, Input, Checkbox, Button } from 'antd';
+
+import { useInput } from '../components/loginform';
 
 export default function SignUp() {
 	const [ pass, setPass ] = useState('');
@@ -11,7 +11,7 @@ export default function SignUp() {
 	const [ passError, setPassError ] = useState(false);
 	const [ termError, setTermError ] = useState(false);
 
-	const onSubmit = e => {
+	const onSubmit = useCallback(e => {
 		e.preventDefault();
 
 		if (pass !== passChk) {
@@ -25,29 +25,29 @@ export default function SignUp() {
 		console.log({
 			id, nick, pass, passChk, term
 		});
-	};
+	}, [pass, passChk, term]);
 
-	const onChangePass = e => {
+	const onChangePass = useCallback(e => {
 		setPass(e.target.value);
-	};
+	}, []);
 
-	const onChangePassChk = e => {
+	const onChangePassChk = useCallback(e => {
 		setPassError(e.target.value !== pass);
 		setPassChk(e.target.value);
-	};
+	}, []);
 
 	const onChangeTerm = e => {
 		setTermError(false);
 		setTerm(e.target.checked);
 	}
 
-	const useInput = (initialValue = null) => {
+	/*const useInput = (initialValue = null) => {
 		const [ value, setter ] = useState(initialValue);
 		const handler = e => {
 			setter(e.target.value);
 		};
 		return [value, handler];
-	};
+	};*/
 
 	const [ id, onChangeId ] = useInput('');
 	const [ nick, onChangeNick ] = useInput('');
