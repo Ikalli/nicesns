@@ -4,6 +4,6 @@
 ## Skills
 * Next.js
 * Redux
-* Styled-Components
+* Ant Design
 * Express
 * MySQL
