@@ -1,26 +1,29 @@
-import { Card, Avatar } from 'antd';
-
-const mock = {
-	nickname: 'MockNickName',
-	Post: [],
-	Followings: [],
-	Followers: [],
-	isLoggedIn: false
-}
+import { Card, Avatar, Button } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutAction } from '../reducers/user';
+import { useCallback } from 'react';
 
 function UserProfile() {
+	const dispatch = useDispatch();
+	const { user } = useSelector(state => state.user);
+
+	const onLogout = useCallback(() => {
+		dispatch(logoutAction());
+	}, []);
+
 	return(
 		<>
 			<Card actions={[
-					<div key="twit">Twit<br />{mock.Post.length}</div>,
-					<div key="following">Followings<br />{mock.Followings.length}</div>,
-					<div key="follower">Followers<br />{mock.Followers.length}</div>
+					<div key="twit">Twit<br />{user.Post.length}</div>,
+					<div key="following">Followings<br />{user.Followings.length}</div>,
+					<div key="follower">Followers<br />{user.Followers.length}</div>
 				]}
 			>
 				<Card.Meta
-					avatar={<Avatar>{mock.nickname[0]}</Avatar>}
-					title={mock.nickname}
+					avatar={<Avatar>{user.nickname[0]}</Avatar>}
+					title={user.nickname}
 				/>
+				<Button onClick={onLogout}>LogOut</Button>
 			</Card>
 		</>
 	);
