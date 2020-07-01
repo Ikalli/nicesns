@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import reducers from '../reducers';
 
 
-function NiceSns({ Component }) {
+function NiceSns({ Component, store }) {
 	return(
 		<Provider store={store}>
 			<Head>
@@ -30,9 +30,20 @@ NiceSns.PropTypes = {
 
 const configureStore = (initialState, options) => {
 	const middlewares = [];
-	const enhancer = compose(
-		applyMiddleware(...middlewares)
-	);
+	
+	const composeEnhancers =
+    typeof window === 'object' &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
+    process.env.NODE_ENV !== 'production'
+      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+          // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+        })
+      : compose;
+
+  const enhancer = composeEnhancers(
+    applyMiddleware(...middlewares),
+    // other store enhancers if any
+  );
 
 	const store = createStore(reducers, initialState, enhancer);
 	return store;
