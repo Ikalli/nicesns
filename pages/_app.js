@@ -1,11 +1,10 @@
 import Head from 'next/head';
 import PropTypes from 'prop-types';
 import Layout from '../components/layout';
-import { Container } from 'next/app';
 
 function NiceSns({ Component }) {
 	return(
-		<Container>
+		<>
 			<Head>
 				<title>NiceSNS</title>
 				<link rel="stylesheet"
@@ -15,7 +14,7 @@ function NiceSns({ Component }) {
       <Layout>
       	<Component />
     	</Layout>
-  	</Container>
+  	</>
 	);
 };
 
