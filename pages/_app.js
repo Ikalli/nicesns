@@ -28,25 +28,12 @@ NiceSns.PropTypes = {
 	store: PropTypes.object,
 };
 
-const configureStore = (initialState, options) => {
+export default withRedux((initialState, options) => {
 	const middlewares = [];
-	
-	const composeEnhancers =
-    typeof window === 'object' &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
-    process.env.NODE_ENV !== 'production'
-      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-          // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
-        })
-      : compose;
-
-  const enhancer = composeEnhancers(
+  const enhancer = compose(
     applyMiddleware(...middlewares),
-    // other store enhancers if any
   );
 
 	const store = createStore(reducers, initialState, enhancer);
 	return store;
-}
-
-export default withRedux(configureStore)(NiceSns);
+})(NiceSns);
