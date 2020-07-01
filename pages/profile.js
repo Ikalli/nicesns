@@ -16,11 +16,13 @@ export default function Profile() {
 				loadMore={<Button style={{ width: '100%' }}>LoadMore</Button>}
 				bordered
 				renderItem={item => {
-					<List.Item style={{ marginTop: '20px' }}>
-						<Card actions={[<StopOutlined />]}>
-							<Card.Meta description={item}/>
-						</Card>
-					</List.Item>
+					return(
+						<List.Item style={{ marginTop: '20px' }}>
+							<Card actions={[<StopOutlined />]}>
+								<Card.Meta description={item}/>
+							</Card>
+						</List.Item>
+					);
 				}}
 			/>
 			<List
@@ -32,11 +34,13 @@ export default function Profile() {
 				loadMore={<Button style={{ width: '100%' }}>LoadMore</Button>}
 				bordered
 				renderItem={item => {
-					<List.Item style={{ marginTop: '20px' }}>
-						<Card actions={[<StopOutlined />]}>
-							<Card.Meta description={item}/>
-						</Card>
-					</List.Item>
+					return(
+						<List.Item style={{ marginTop: '20px' }}>
+							<Card actions={[<StopOutlined />]}>
+								<Card.Meta description={item}/>
+							</Card>
+						</List.Item>
+					);
 				}}
 			/>
 		</>
