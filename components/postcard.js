@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import { Card, Avatar, Button } from 'antd';
 import { 
 	RetweetOutlined, 
@@ -30,11 +30,11 @@ export default function PostCard({ post }) {
 	);
 }
 
-PostCard.PropTypes = {
-	post: PropTypes.shape({
-		User: PropTypes.object,
-		content: PropTypes.string,
-		img: PropTypes.string,
-		createAt: PropTypes.object,
+PostCard.propTypes = {
+	post: propTypes.shape({
+		User: propTypes.object,
+		content: propTypes.string,
+		img: propTypes.string,
+		createAt: propTypes.object,
 	})
 };

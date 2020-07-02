@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import { Menu, Input, Row, Col } from 'antd';
 import { useSelector } from 'react-redux';
 
@@ -38,8 +38,8 @@ function Layout({ children }) {
 	);
 };
 
-Layout.PropTypes = {
-	children: PropTypes.node
+Layout.propTypes = {
+	children: propTypes.node
 }
 
 export default Layout;

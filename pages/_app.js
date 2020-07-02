@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import Layout from '../components/layout';
 import withRedux from 'next-redux-wrapper';
 import { createStore } from 'redux';
@@ -22,9 +22,9 @@ function NiceSns({ Component }) {
 	);
 };
 
-NiceSns.PropTypes = {
-	Component: PropTypes.elementType,
-	store: PropTypes.object,
+NiceSns.propTypes = {
+	Component: propTypes.elementType,
+	store: propTypes.object,
 };
 
 export default withRedux((initialState, options) => {

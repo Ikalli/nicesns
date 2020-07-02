@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import { Form, Input, Button } from 'antd';
 
 export default function PostForm({ imagePaths }) {
@@ -31,6 +31,6 @@ export default function PostForm({ imagePaths }) {
 	);
 }
 
-PostForm.PropTypes = {
-	imagePaths: PropTypes.array
+PostForm.propTypes = {
+	imagePaths: propTypes.array
 };

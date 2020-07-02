@@ -3,7 +3,7 @@ export const initialState = {
 	mainPosts: [{
 		User: {
 			id: 1,
-			nickname: 'MockNickName',
+			nickname: 'Ekalii',
 		},
 		content: 'First Card',
 		img: 'https://avatars0.githubusercontent.com/u/16658067?s=460&u=09f9f385ffec1453896c9b079cc4fd503ee4cded&v=4'

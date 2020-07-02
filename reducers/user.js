@@ -1,5 +1,5 @@
 const mockUser = {
-	nickname: 'MockUserRedux',
+	nickname: 'Ekalii',
 	Post: [],
 	Followings: [],
 	Followers: [],
