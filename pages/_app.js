@@ -1,10 +1,7 @@
 import Head from 'next/head';
 import propTypes from 'prop-types';
 import Layout from '../components/layout';
-import withRedux from 'next-redux-wrapper';
-import { createStore } from 'redux';
-import reducer from '../reducers';
-
+import { wrapper } from './_store';
 
 function NiceSns({ Component }) {
 	return(
@@ -27,7 +24,4 @@ NiceSns.propTypes = {
 	store: propTypes.object,
 };
 
-export default withRedux((initialState, options) => {
-	const store = createStore(reducer, initialState);
-	return store;
-})(NiceSns);
+export default wrapper.withRedux(NiceSns);
