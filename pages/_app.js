@@ -2,14 +2,13 @@ import Head from 'next/head';
 import PropTypes from 'prop-types';
 import Layout from '../components/layout';
 import withRedux from 'next-redux-wrapper';
-import { applyMiddleware, compose, createStore } from 'redux';
-import { Provider } from 'react-redux';
-import reducers from '../reducers';
+import { createStore } from 'redux';
+import reducer from '../reducers';
 
 
-function NiceSns({ Component, store }) {
+function NiceSns({ Component }) {
 	return(
-		<Provider store={store}>
+		<>
 			<Head>
 				<title>NiceSNS</title>
 				<link rel="stylesheet"
@@ -19,7 +18,7 @@ function NiceSns({ Component, store }) {
       <Layout>
       	<Component />
     	</Layout>
-  	</Provider>
+  	</>
 	);
 };
 
@@ -29,11 +28,6 @@ NiceSns.PropTypes = {
 };
 
 export default withRedux((initialState, options) => {
-	const middlewares = [];
-  const enhancer = compose(
-    applyMiddleware(...middlewares),
-  );
-
-	const store = createStore(reducers, initialState, enhancer);
+	const store = createStore(reducer, initialState);
 	return store;
 })(NiceSns);
