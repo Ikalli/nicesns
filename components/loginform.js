@@ -1,9 +1,9 @@
 import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import { Form, Input, Button } from 'antd';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { loginAction } from '../reducers/user';
+import { loginRequestAction } from '../reducers/user';
 
 export const useInput = (initialValue = null) => {
 	const [value, setter] = useState(initialValue);
@@ -15,13 +15,14 @@ export const useInput = (initialValue = null) => {
 
 function LoginForm() {
 	const dispatch = useDispatch();
+	const { isLoggginIn } = useSelector(state => state.user)
 
 	const [id, onChangeId] = useInput('');
 	const [pass, onChangePass] = useInput('');
 
 	const onSubmitForm = useCallback(e => {
 		e.preventDefault();
-		dispatch(loginAction({
+		dispatch(loginRequestAction({
 			id,
 			pass
 		}));

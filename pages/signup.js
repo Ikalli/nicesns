@@ -1,15 +1,31 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Form, Input, Checkbox, Button } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import Router from 'next/router';
+import { signupRequestAction } from '../reducers/user';
 
-//import { useInput } from '../components/loginform';
+import { useInput } from '../components/loginform';
 
 export default function SignUp() {
+	const dispatch = useDispatch();
+	const { isSignedUp, me } = useSelector(state => state.user);
+
+	const [ id, onChangeId ] = useState('');
+	const [ nick, onChangeNick ] = useState('');
+
 	const [ pass, setPass ] = useState('');
 	const [ passChk, setPassChk ] = useState('');
 	const [ term, setTerm ] = useState('');
 
 	const [ passError, setPassError ] = useState(false);
 	const [ termError, setTermError ] = useState(false);
+
+	useEffect(() => {
+		if (me) {
+			alert('Move to mainpage');
+			Router.push('/');
+		}
+	}, [me && me.id])
 
 	const onSubmit = useCallback(e => {
 		e.preventDefault();
@@ -22,9 +38,11 @@ export default function SignUp() {
 			return setTermError(true);
 		};
 
-		console.log({
-			id, nick, pass, passChk, term
-		});
+		return dispatch(signupRequestAction({
+			id,
+			pass,
+			nick
+		}))
 	}, [pass, passChk, term]);
 
 	const onChangePass = useCallback(e => {
@@ -40,14 +58,6 @@ export default function SignUp() {
 		setTermError(false);
 		setTerm(e.target.checked);
 	}
-
-	const useInput = (initialValue = null) => {
-		const [ value, setter ] = useState(initialValue);
-		const handler = e => {
-			setter(e.target.value);
-		};
-		return [value, handler];
-	};
 
 	const [ id, onChangeId ] = useInput('');
 	const [ nick, onChangeNick ] = useInput('');
