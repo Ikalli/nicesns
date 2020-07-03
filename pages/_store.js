@@ -8,9 +8,9 @@ const initStore = (initialState, options) => {
 	const sagaMiddleware = createSagaMiddleware();
 	const middlewares = [sagaMiddleware];
 	const enhancer = compose(applyMiddleware(...middlewares));
+	const store = createStore(reducer, initialState, enhancer);
 	sagaMiddleware.run(rootSaga);
-
-	return createStore(reducer, initialState, enhancer);
+	return store;
 }
 
 export const wrapper = createWrapper(initStore);
