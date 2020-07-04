@@ -4,11 +4,11 @@ import reducer from '../reducers';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from '../saga'
 
-const initStore = (initialState, options) => {
+const initStore = () => {
 	const sagaMiddleware = createSagaMiddleware();
 	const middlewares = [sagaMiddleware];
 	const enhancer = compose(applyMiddleware(...middlewares));
-	const store = createStore(reducer, initialState, enhancer);
+	const store = createStore(reducer, enhancer);
 	sagaMiddleware.run(rootSaga);
 	return store;
 }
