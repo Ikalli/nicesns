@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../reducers/post';
 
-export default function PostForm({ imagePaths }) {
+export default function PostForm() {
 	const dispatch = useDispatch();
 	const { imagePaths, isAddingPost, postAdded } = useSelector(state => state.post);
 	const [ text, setText ] = useState('');
