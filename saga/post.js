@@ -1,63 +1,63 @@
-import { all, call, fork, put, delay, takeLatest } from 'redux-saga/effects';
-import axios from 'axios';
-import * as actions from '../reducers/post';
+import { all, delay, fork, put, takeLatest } from 'redux-saga/effects';
+import {
+  ADD_COMMENT_FAILURE,
+  ADD_COMMENT_REQUEST,
+  ADD_COMMENT_SUCCESS,
+  ADD_POST_FAILURE,
+  ADD_POST_REQUEST,
+  ADD_POST_SUCCESS,
+} from '../reducers/post';
 
-function addPostApi() {
-  return axios.post('/postcard');
-};
+function addPostAPI() {
 
-function* addPost({ payload }) {
-  try{
-    const { addPostData } = payload;
-    console.log('Add post data: ', addPostData);
-    yield delay(2000);
-    yield put({
-      type: actions.ADD_POST_SUCCESS,
-    });
-  } catch(error) {
-    console.error('Add post error: ', error);
-    yield put({
-      type: actions.ADD_POST_FAILURE,
-      error,
-    });
-  }
 }
 
-function addCommentApi() {
-  return axios.post('/addcomment');
-}
-
-function* addComment({ payload }) {
-  try  {
-    const { addCommentData } = payload;
-    console.log('Add comment data: ', addCommentData);
+function* addPost() {
+  try {
     yield delay(2000);
     yield put({
-      type: actions.ADD_COMMENT_SUCCESS,
-      payload: {
-        postId: addCommentData.postId,
-      },
+      type: ADD_POST_SUCCESS,
     });
-  } catch(error) {
-    console.error('Add comment error: ', error);
+  } catch (e) {
     yield put({
-      type: actions.ADD_COMMENT_FAILURE,
-      error
+      type: ADD_POST_FAILURE,
+      error: e,
     });
   }
 }
 
 function* watchAddPost() {
-  yield takeLatest(actions.ADD_POST_REQUEST, addPost);
+  yield takeLatest(ADD_POST_REQUEST, addPost);
+}
+
+function addCommentAPI() {
+
+}
+
+function* addComment(action) {
+  try {
+    yield delay(2000);
+    yield put({
+      type: ADD_COMMENT_SUCCESS,
+      data: {
+        postId: action.data.postId,
+      },
+    });
+  } catch (e) {
+    yield put({
+      type: ADD_COMMENT_FAILURE,
+      error: e,
+    });
+  }
 }
 
 function* watchAddComment() {
-  yield takeLatest(actions.ADD_COMMENT_REQUEST, addComment);
+  yield takeLatest(ADD_COMMENT_REQUEST, addComment);
 }
 
 export default function* postSaga() {
   yield all([
     fork(watchAddPost),
-    fork(watchAddComment)
-  ])
+    fork(watchAddComment),
+  ]);
 }

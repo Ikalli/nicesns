@@ -1,8 +1,8 @@
 import propTypes from 'prop-types';
 import { Form, Input, Button } from 'antd';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import * as actions from '../reducers/post';
+import { ADD_POST_REQUEST } from '../reducers/post';
 
 export default function PostForm() {
 	const dispatch = useDispatch();
@@ -15,16 +15,19 @@ export default function PostForm() {
 		}
 	}, [postAdded]);
 
-	const onSubmitForm = e => {
+	const onSubmitForm = useCallback(e => {
 		e.preventDefault();
-		dispatch(actions.addPostRequest({
-			text,
-		}));
-	};
+		dispatch({
+			type: ADD_POST_REQUEST,
+			data: {
+				text,
+			}
+		});
+	}, []);
 
-	const onChangeText = e => {
+	const onChangeText = useCallback(e => {
 		setText(e.target.value);
-	};
+	}, []);
 
 	return(
 		<>

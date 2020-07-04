@@ -1,80 +1,63 @@
-import { all, fork, takeEvery, call, put, delay } from 'redux-saga/effects';
+import { all, delay, fork, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
-import * as acions from '../reducers/user';
+import {
+  LOG_IN_FAILURE,
+  LOG_IN_REQUEST,
+  LOG_IN_SUCCESS,
+  SIGN_UP_FAILURE,
+  SIGN_UP_REQUEST,
+  SIGN_UP_SUCCESS,
+} from '../reducers/user';
 
-function loginApi() {
-	return axios.post('/login');
+function loginAPI() {
+  return axios.post('/login');
 }
 
-function* login({ payload }) {
-	try {
-		const { loginData } = payload;
-		console.log("Login data: ", loginData);
-		yield delay(2000);
-		yield put({
-			type: actions.LOG_IN_SUCCESS,
-		});
-	} catch(error) {
-		console.error('Login error: ', error);
-		yield put({
-			type: actions.LOG_IN_FAILURE,
-			error
-		});
-	}
-}
-
-function logoutApi() {
-	return axios.post('./logout');
-}
-
-function* logout() {
-	try {
-		yield delay(2000);
-		yield put({
-			type: actions.LOG_OUT_SUCCESS
-		})
-	} catch(error) {
-		console.error('Logout error:', error);
-		yield put({
-			type: actions.LOG_OUT_FAILURE,
-			error
-		});
-	}
-}
-
-function signUpApi() {
-	return axios.post('/signup');
-}
-
-function* signUp({ payload }) {
-	try {
-		const { signUpData } = payload;
-		console.log('Sign Up Data: ', signUpData);
-		yield delay(2000);
-		yield put({
-			type: actions.SIGN_UP_SUCCESS
-		});
-	} catch(error) {
-		console.error('Sign Up Error: ', error);
-		yield put({
-			type: actions.SIGN_UP_FAILURE,
-			error
-		});
-	}
+function* login() {
+  try {
+    yield delay(2000);
+    yield put({
+      type: LOG_IN_SUCCESS,
+    });
+  } catch (e) {
+    console.error(e);
+    yield put({
+      type: LOG_IN_FAILURE,
+    });
+  }
 }
 
 function* watchLogin() {
-	yield takeEvery(actions.LOG_IN_REQUEST, login);
-	yield takeEvery(actions.LOG_OUT_REQUEST, logout);
+  yield takeEvery(LOG_IN_REQUEST, login);
+}
+
+function signUpAPI() {
+  return axios.post('/login');
+}
+
+function* signUp() {
+  try {
+    yield delay(2000);
+    throw new Error('에러에러에러');
+    yield put({
+      type: SIGN_UP_SUCCESS,
+    });
+  } catch (e) {
+    console.error(e);
+    yield put({
+      type: SIGN_UP_FAILURE,
+      error: e,
+    });
+  }
 }
 
 function* watchSignUp() {
-	yield takeEvery(actions.SIGN_UP_REQUEST, signUp);
+  yield takeEvery(SIGN_UP_REQUEST, signUp);
 }
 
 export default function* userSaga() {
-	yield all([
-		fork(watchLogin),
-		fork(watchSignUp),
-	]);
+  yield all([
+    fork(watchLogin),
+    fork(watchSignUp),
+  ]);
 }

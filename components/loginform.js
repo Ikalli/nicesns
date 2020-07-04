@@ -2,8 +2,7 @@ import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import { Form, Input, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { loginRequestAction } from '../reducers/user';
+import { LOG_IN_REQUEST } from '../reducers/user';
 
 export const useInput = (initialValue = null) => {
 	const [value, setter] = useState(initialValue);
@@ -22,10 +21,12 @@ function LoginForm() {
 
 	const onSubmitForm = useCallback(e => {
 		e.preventDefault();
-		dispatch(loginRequestAction({
-			id,
-			pass
-		}));
+		dispatch({
+			type: LOG_IN_REQUEST,
+			data: {
+				id, pass
+			}
+		});
 	}, [id, pass]);
 
 	return(
