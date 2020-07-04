@@ -1,21 +1,32 @@
 import { useState, useCallback, useEffect } from 'react';
 import { Form, Input, Checkbox, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
+import propTypes from 'prop-types';
 import Router from 'next/router';
-import { signupRequestAction } from '../reducers/user';
-
+import { SIGN_UP_REQUEST } from '../reducers/user';
 import { useInput } from '../components/loginform';
+
+const TextInput = ({ value }) => (
+	<div>{value}</div>
+);
+
+TextInput.propTypes = {
+	value: propTypes.string,
+}
 
 export default function SignUp() {
 	const dispatch = useDispatch();
-	const { isSignedUp, me } = useSelector(state => state.user);
+	const { isSigningUp, me } = useSelector(state => state.user);
 
-	const [ pass, setPass ] = useState('');
 	const [ passChk, setPassChk ] = useState('');
 	const [ term, setTerm ] = useState('');
 
 	const [ passError, setPassError ] = useState(false);
 	const [ termError, setTermError ] = useState(false);
+
+	const [ id, onChangeId ] = useInput('');
+	const [ pass, onChangePass ] = useInput('');
+	const [ nick, onChangeNick ] = useInput('');
 
 	useEffect(() => {
 		if (me) {
@@ -35,29 +46,25 @@ export default function SignUp() {
 			return setTermError(true);
 		};
 
-		return dispatch(signupRequestAction({
-			id,
-			pass,
-			nick
-		}))
+		return dispatch({
+			type: SIGN_UP_REQUEST,
+			data: {
+				id,
+				pass,
+				nick
+			}
+		})
 	}, [pass, passChk, term]);
-
-	const onChangePass = useCallback(e => {
-		setPass(e.target.value);
-	}, []);
 
 	const onChangePassChk = useCallback(e => {
 		setPassError(e.target.value !== pass);
 		setPassChk(e.target.value);
-	}, []);
+	}, [pass]);
 
-	const onChangeTerm = e => {
+	const onChangeTerm = useCallback(e => {
 		setTermError(false);
 		setTerm(e.target.checked);
-	}
-
-	const [ id, onChangeId ] = useInput('');
-	const [ nick, onChangeNick ] = useInput('');
+	}, []);
 
 	return (
 		<>
