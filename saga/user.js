@@ -14,11 +14,11 @@ function* login({ payload }) {
 		yield put({
 			type: actions.LOG_IN_SUCCESS,
 		});
-	} catch(err) {
-		console.error('Login error: ', err);
+	} catch(error) {
+		console.error('Login error: ', error);
 		yield put({
 			type: actions.LOG_IN_FAILURE,
-			err
+			error
 		});
 	}
 }
@@ -33,11 +33,11 @@ function* logout() {
 		yield put({
 			type: actions.LOG_OUT_SUCCESS
 		})
-	} catch(err) {
-		console.error('Logout error:', err);
+	} catch(error) {
+		console.error('Logout error:', error);
 		yield put({
 			type: actions.LOG_OUT_FAILURE,
-			err
+			error
 		});
 	}
 }
@@ -54,11 +54,11 @@ function* signUp({ payload }) {
 		yield put({
 			type: actions.SIGN_UP_SUCCESS
 		});
-	} catch(err) {
-		console.error('Sign Up Error: ', err);
+	} catch(error) {
+		console.error('Sign Up Error: ', error);
 		yield put({
 			type: actions.SIGN_UP_FAILURE,
-			err
+			error
 		});
 	}
 }
