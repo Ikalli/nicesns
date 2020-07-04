@@ -10,9 +10,6 @@ export default function SignUp() {
 	const dispatch = useDispatch();
 	const { isSignedUp, me } = useSelector(state => state.user);
 
-	const [ id, onChangeId ] = useState('');
-	const [ nick, onChangeNick ] = useState('');
-
 	const [ pass, setPass ] = useState('');
 	const [ passChk, setPassChk ] = useState('');
 	const [ term, setTerm ] = useState('');
