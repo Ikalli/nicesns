@@ -84,7 +84,7 @@ export default function SignUp() {
 					{passError && <div style={{ color: 'red' }}>Please check password</div>}
 				</div>
 				<div>
-					<Checkbox name="user-term" value={term} onChange={onChangeTerm}>
+					<Checkbox name="user-term" checked={term} onChange={onChangeTerm}>
 						Are you agree this term?
 					</Checkbox>
 					{termError && <div style={{ color: 'red' }}>You must agree term</div>}
