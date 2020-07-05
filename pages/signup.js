@@ -82,12 +82,12 @@ export default function SignUp() {
 				<div>
 					<label htmlFor="user-pass">Password</label>
 					<br />
-					<Input name="user-pass" required value={pass} onChange={onChangePass} />
+					<Input name="user-pass" type="password" required value={pass} onChange={onChangePass} />
 				</div>
 				<div>
 					<label htmlFor="user-pass-chk">Password Check</label>
 					<br />
-					<Input name="user-pass-chk" required value={passChk} onChange={onChangePassChk} />
+					<Input name="user-pass-chk" type="password" required value={passChk} onChange={onChangePassChk} />
 					{passError && <div style={{ color: 'red' }}>Please check password</div>}
 				</div>
 				<div>
