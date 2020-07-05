@@ -4,7 +4,7 @@ import { StopOutlined } from '@ant-design/icons';
 import NicknameEditForm from '../components/nicknameeditform';
 
 export default function Profile() {
-	return(
+	return (
 		<>
 			<NicknameEditForm/>
 			<List
