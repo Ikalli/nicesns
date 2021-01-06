@@ -10,7 +10,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.2.1",
     "antd": "^4.3.5",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "next": "^9.4.4",
     "next-redux-wrapper": "^6.0.2",
     "prop-types": "^15.7.2",
